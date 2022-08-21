@@ -1,6 +1,16 @@
 require 'pry'
+require_relative './concerns/memorable'
+require_relative './concerns/findable'
+require_relative './concerns/paramable'
 
 class Artist
+
+  include Memorable::InstanceMethods
+  extend Memorable::ClassMethods
+  include Paramable::InstanceMethods
+  extend Findable::ClassMethods
+  
+
   attr_accessor :name
   attr_reader :songs
 
@@ -19,13 +29,13 @@ class Artist
     @@artists
   end
 
-  def self.reset_all
-    self.all.clear
-  end
+  # def self.reset_all
+  #   self.all.clear
+  # end
 
-  def self.count
-    self.all.count
-  end
+  # def self.count
+  #   self.all.count
+  # end
 
   def add_song(song)
     @songs << song
@@ -36,7 +46,7 @@ class Artist
     songs.each { |song| add_song(song) }
   end
 
-  def to_param
-    name.downcase.gsub(' ', '-')
-  end
+  # def to_param
+  #   name.downcase.gsub(' ', '-')
+  # end
 end
